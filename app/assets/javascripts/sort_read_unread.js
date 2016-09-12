@@ -1,11 +1,11 @@
 $(document).ready(function(){
   $(".all-read").on("click", function(){
-    $(".false").hide()
-    $(".true").show()
+    $(".false").hide("slide")
+    $(".true").show("slide")
   })
 
   $(".all-unread").on("click", function(){
-    $(".true").hide()
-    $(".false").show()
+    $(".true").hide("slide")
+    $(".false").show("slide")
   })
 })
