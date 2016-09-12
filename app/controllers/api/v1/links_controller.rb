@@ -1,6 +1,11 @@
 class Api::V1::LinksController < ApplicationController
   def create
-    render json: Link.create(link_params)
+    byebug
+    # link = Link.new(link_params)
+    # byebug
+    # link.user = current_user
+    # link.save!
+    render json: Link.create!(link_params)
   end
 
   private

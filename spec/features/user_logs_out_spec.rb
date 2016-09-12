@@ -6,7 +6,7 @@ RSpec.feature "user logs out" do
       user = User.create(email: "hello", password: "password")
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit links_path
+      visit user_links_path(user)
       click_link "Log Out"
 
       expect(current_path).to eq root_path

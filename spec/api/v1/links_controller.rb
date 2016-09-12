@@ -10,6 +10,7 @@ RSpec.describe "api::v1::links_controller" do
     link = Link.last
     expect(link.title).to   eq link_data[:title]
     expect(link.url).to     eq link_data[:url]
+    expect(link.user).to    eq user
     expect(link.status).to  eq "false"
   end
 end

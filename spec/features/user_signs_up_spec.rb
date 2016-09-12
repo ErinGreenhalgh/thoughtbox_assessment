@@ -16,7 +16,9 @@ RSpec.feature "visitor creates an account" do
       fill_in "user[password_confirmation]", with: password_confirmation
       click_button 'Sign Up'
 
-      expect(current_path).to eq links_path
+      user = User.last
+
+      expect(current_path).to eq user_links_path(user)
       expect(User.count).to eq 1
       expect(page).not_to have_content "Log In"
       expect(page).to have_content "Log Out"

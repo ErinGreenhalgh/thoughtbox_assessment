@@ -1,21 +1,29 @@
 require "rails_helper"
 
 RSpec.feature "user creates a link submission" do
-  context "successfully" do
+  context "successfully", js: true do
     scenario "by submitting valid information" do
-      user = User.create(email: "hello", password: "password")
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      user = User.create(email: "e@gmail.com", password: "password")
+      # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      url   = "turing.io"
-      title = "Turing School"
-
-      visit links_path
-      within(".create-link") do
-        expect(page).to have_content("Submit a New Link")
-        fill_in "link[title]", with: title
-        fill_in "link[url]", with: url
-        click_button "Submit Link"
+      visit '/'
+      within('.login') do
+        fill_in 'email', with: user.email
+        fill_in 'password', with: user.password
+        fill_in 'password_confirmation', with: user.password
+        click_button "Log In"
       end
+
+      title = "Turing School"
+      url   = "turing.io"
+
+      visit user_links_path(user)
+      expect(page).to have_content("Submit a New Link")
+
+      find("input[class='new-link-title']").send_keys("#{title}")
+      find("input[class='new-link-url']").send_keys("#{url}")
+      click_button "Submit Link"
+      # byebug
 
       link = Link.last
       expect(link.url).to eq(url)
