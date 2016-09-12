@@ -1,6 +1,7 @@
 <%= render partial: "shared/navbar" %>
 <div class="user-link-container" data-userid="<%= current_user.id %>">
   <%= render partial: "create_link" %>
+  <input type="text"  class="search" placeholder="Search..." required>
   <div class="filtering options">
     <button class="alphabet" type="button">Sort Alphabetically</button>
     <button class="all-read" type="button">See All Read</button>
