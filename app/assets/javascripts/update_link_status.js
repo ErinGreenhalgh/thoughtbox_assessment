@@ -17,7 +17,7 @@ $(document).ready(function(){
       dataType: "JSON",
       data: { link: { status: newStatus}},
       success: function(idea){
-        $("#" + linkId).addClass("read")
+        $("#" + linkId).addClass("true")
       },
       error: function(){
         console.log("Update status did not work")
@@ -35,7 +35,7 @@ $(document).ready(function(){
       dataType: "JSON",
       data: { link: { status: newStatus}},
       success: function(idea){
-        $("#" + linkId).removeClass("read")
+        $("#" + linkId).removeClass("true")
       },
       error: function(){
         console.log("Update status did not work")
