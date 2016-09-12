@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
       if @user.save
         session[:user_id] = @user.id
-        redirect_to links_path
+        redirect_to user_links_path(@user)
       else
         flash.error = "That didn't work"
         render :new
