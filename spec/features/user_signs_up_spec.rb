@@ -19,7 +19,7 @@ RSpec.feature "visitor creates an account" do
       expect(current_path).to eq links_path
       expect(User.count).to eq 1
       expect(page).not_to have_content "Log In"
-      # expect(page).to have_content "Log Out"
+      expect(page).to have_content "Log Out"
     end
   end
 end
