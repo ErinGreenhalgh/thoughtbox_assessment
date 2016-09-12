@@ -1,0 +1,6 @@
+<nav>
+  <ul>
+    <li>Welcome, <%= current_user.email %></li>
+    <li> <%= link_to "Log Out", logout_path, method: :delete  %></li>
+  </ul>
+</nav>
