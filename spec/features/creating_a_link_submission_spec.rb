@@ -59,9 +59,28 @@ RSpec.feature "user creates a link submission" do
     end
   end
 
-  # context "unsuccessfully", js: true do
-  #   scenario "by leaving url blank" do
-  #
-  #   end
-  # end
+  context "unsuccessfully", js: true do
+    scenario "by leaving url blank" do
+      user = User.create(email: "e@gmail.com", password: "password")
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      title = "Bad URL"
+
+      visit user_links_path(user)
+      expect(page).to have_content("Submit a New Link")
+
+      find("input[class='new-link-title']").send_keys("#{title}")
+      click_button "Submit Link"
+
+
+      expect(page.driver.browser.switch_to.alert.text).to eq("Please enter a valid URL.")
+      page.driver.browser.switch_to.alert.accept
+
+      within(".all-links") do
+        expect(page).not_to have_content title
+      end
+
+      expect(Link.find_by(title: title)).to eq nil
+    end
+  end
 end
