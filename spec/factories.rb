@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :link do
     url "http://turing.io"
     title "Link Title"
+    status "false"
     user
   end
 
@@ -9,11 +10,5 @@ FactoryGirl.define do
     email "erin@gmail.com"
     password "password"
     password_confirmation "password"
-
-    factory :user_with_links do
-      transient do
-        links_count 2
-      end
-    end
   end
-end 
+end
