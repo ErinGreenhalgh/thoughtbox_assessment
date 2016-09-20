@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  protect_from_forgery with: :exception
 
   def new
     @user = User.new
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         redirect_to user_links_path(@user)
       else
-        flash.error = "That didn't work"
+        flash[:error] = @user.errors.full_messages.join("")
         render :new
       end
   end
