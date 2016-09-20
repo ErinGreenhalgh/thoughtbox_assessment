@@ -77,4 +77,20 @@ RSpec.describe "api::v1::links_controller" do
     expect(link.title).not_to eq(new_title)
     expect(link.title).not_to eq(new_url)
   end
+
+  it "can return all links in alphabetical order" do
+    user = create(:user)
+    link_b = create(:link, title: "B Link", user: user)
+    link_a = create(:link, title: "A Link", user: user)
+    # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    get '/api/v1/alphabetical'
+
+    expect(response).to be_success
+    data = JSON.parse(response.body)
+    first_link = data[0]
+    second_link = data[1]
+    expect(first_link["title"]).to eql(link_a.title)
+    expect(second_link["title"]).to eql(link_b.title)
+  end
 end
