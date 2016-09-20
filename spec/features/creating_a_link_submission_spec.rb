@@ -15,23 +15,20 @@ RSpec.feature "user creates a link submission" do
       find("input[class='new-link-title']").send_keys("#{title}")
       find("input[class='new-link-url']").send_keys("#{url}")
       click_button "Submit Link"
-      # byebug
 
-      # link = Link.last
-      # expect(link.url).to eq(url)
-      # expect(link.title).to eq(title)
-      # expect(link.status).to eq("false")
-      # expect(link.user).to eq(user)
+      within(".all-links") do
+        expect(page).to have_content url
+        expect(page).to have_content title
+      end
+
+      link = Link.last
+      expect(link.url).to eq(url)
+      expect(link.title).to eq(title)
+      expect(link.status).to eq("false")
+      expect(link.user).to eq(user)
 
       expect(current_path).to eq user_links_path(user)
 
-      within(".all-links") do
-        within("#link-#{link.id}") do
-          expect(page).to have_content url
-          expect(page).to have_content title
-          expect(page).to have_content "false"
-        end
-      end
     end
   end
 
