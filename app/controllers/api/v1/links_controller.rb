@@ -1,6 +1,11 @@
 class Api::V1::LinksController < ApplicationController
   def create
-    render json: Link.create!(link_params)
+    link = Link.new(link_params)
+    if link.save
+      render json: link
+    else
+      render_error
+    end
   end
 
   def index
@@ -8,10 +13,21 @@ class Api::V1::LinksController < ApplicationController
   end
 
   def update
-    render json: Link.update(params[:id], link_params)
+    link = Link.find(params[:id])
+    if link.update(link_params)
+      render json: link
+    else
+      render_error
+    end
   end
 
   private
+
+  def render_error
+    render status: 400, json: {
+      message: "Please enter a valid URL."
+    }
+  end
 
   def link_params
     allowed = params.require(:link).permit(:title, :url, :user_id, :status)

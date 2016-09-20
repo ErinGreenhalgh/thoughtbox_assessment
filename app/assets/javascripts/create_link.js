@@ -17,8 +17,14 @@ $(document).ready(function(){
           $(".new-link-url").val("")
         },
         error: function(errorResponse){
-          console.log(errorResponse)
+          alert(errorMessage(errorResponse))
         }
       })
     })
 })
+
+function errorMessage(errorResponse){
+  var error = JSON.parse(errorResponse.responseText)
+  var message = error.message
+  return message
+}
