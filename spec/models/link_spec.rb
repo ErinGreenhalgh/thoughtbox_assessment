@@ -28,4 +28,12 @@ RSpec.describe Link, type: :model do
     expect(link_valid.save).to be true
     expect(link_invalid.save).to be false
   end
+
+  it "can't be updated with an invalid url" do
+    user = User.create(email: "e@turing.io", password: "password")
+    link = Link.create(title: "Title", url: "http://turing.io", user_id: user.id)
+    new_url = "bad url"
+
+    expect(link.update(url: new_url)).to eq false 
+  end
 end
