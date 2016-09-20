@@ -10,6 +10,7 @@ $(document).ready(function(){
   $(".all-links").on("click", ".mark-read", function(){
     var currentStatus = $(this).parent().data("status");
     var linkId = $(this).data("id");
+    var button = this
     var newStatus = updateStatus(currentStatus);
     $.ajax({
       url: "/api/v1/links/" + linkId,
@@ -18,8 +19,10 @@ $(document).ready(function(){
       data: { link: { status: newStatus}},
       success: function(idea){
         $("#" + linkId).addClass("true")
+        toggleButtons(button)
       },
-      error: function(){
+      error: function(errorResponse){
+        debugger;
         console.log("Update status did not work")
       }
     })
@@ -28,6 +31,7 @@ $(document).ready(function(){
   $(".all-links").on("click", ".mark-unread", function(){
     var currentStatus = $(this).parent().data("status");
     var linkId = $(this).data("id");
+    var button = this
     var newStatus = updateStatus(currentStatus);
     $.ajax({
       url: "/api/v1/links/" + linkId,
@@ -36,6 +40,7 @@ $(document).ready(function(){
       data: { link: { status: newStatus}},
       success: function(idea){
         $("#" + linkId).removeClass("true")
+        toggleButtons(button)
       },
       error: function(){
         console.log("Update status did not work")
@@ -43,3 +48,11 @@ $(document).ready(function(){
     })
   })
 })
+
+function toggleButtons(button){
+  var $button =  $(button)
+  var neighbor = $button.siblings()[0]
+  var $neighbor = $(neighbor)
+  $button.hide()
+  $neighbor.show()
+}
