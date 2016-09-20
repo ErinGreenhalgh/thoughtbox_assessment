@@ -22,7 +22,6 @@ $(document).ready(function(){
         toggleButtons(button)
       },
       error: function(errorResponse){
-        debugger;
         console.log("Update status did not work")
       }
     })

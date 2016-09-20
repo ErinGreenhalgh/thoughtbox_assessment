@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :link do
     url "http://turing.io"
     title "Link Title"
-    status "unread"
+    status "false"
     user
   end
 
