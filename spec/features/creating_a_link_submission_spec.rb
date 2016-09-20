@@ -7,7 +7,7 @@ RSpec.feature "user creates a link submission" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       title = "Turing School"
-      url   = "turing.io"
+      url   = "http://turing.io"
 
       visit user_links_path(user)
       expect(page).to have_content("Submit a New Link")
