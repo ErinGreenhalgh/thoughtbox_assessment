@@ -14,6 +14,14 @@ RSpec.describe "api::v1::links_controller" do
     expect(link.status).to  eq "false"
   end
 
+   it "can't create a link with an invalid url" do
+     user = User.create(email: "erin@turing.io", password: "password")
+     link_data = {title: "Turing School", url: "bad_url", user_id: user.id}
+     post "/api/v1/links", params: {link: link_data}
+     expect(response).to be_success
+     expect(Link.count).to eq 0
+   end
+
   it "gives a list of links for that user" do
     user1 = User.create(email: "erin@turing.io", password: "password")
     user2 = User.create(email: "hello@turing.io", password: "password")
