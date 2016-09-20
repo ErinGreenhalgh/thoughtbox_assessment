@@ -61,4 +61,20 @@ RSpec.describe "api::v1::links_controller" do
     expect(data["url"]).to eq new_url
     expect(data["status"]).to eq new_status
   end
+
+  it "can't update a link with an invalid url" do
+    user = User.create(email: "erin@turing.io", password: "password")
+    link = Link.create(url: "http://turing.io", title: "Turing", user: user)
+
+    new_title  = "New Title"
+    new_url    = "BAD URL"
+
+    link_data = {title: new_title, url: new_url}
+
+    patch "/api/v1/links/#{link.id}", params: {link: link_data}
+
+    expect(response.status).to eq 400
+    expect(link.title).not_to eq(new_title)
+    expect(link.title).not_to eq(new_url)
+  end
 end
