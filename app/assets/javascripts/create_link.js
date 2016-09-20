@@ -17,7 +17,6 @@ $(document).ready(function(){
           $(".new-link-url").val("")
         },
         error: function(errorResponse){
-          // $('new-link-url').append(errorMessage(errorResponse))
           alert(errorMessage(errorResponse))
         }
       })
@@ -28,5 +27,4 @@ function errorMessage(errorResponse){
   var error = JSON.parse(errorResponse.responseText)
   var message = error.message
   return message
-  // return "<div>" + message + "</div>"
 }

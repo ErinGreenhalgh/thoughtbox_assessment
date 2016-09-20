@@ -47,7 +47,7 @@ RSpec.feature "user creates a link submission" do
       click_button "Submit Link"
 
 
-      expect(page.driver.browser.switch_to.alert.text).to eq("Url is not a valid URL")
+      expect(page.driver.browser.switch_to.alert.text).to eq("Please enter a valid URL.")
       page.driver.browser.switch_to.alert.accept
 
       within(".all-links") do

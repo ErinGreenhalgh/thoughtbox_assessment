@@ -5,7 +5,7 @@ class Api::V1::LinksController < ApplicationController
       render json: link
     else
       render status: 400, json: {
-        message: link.errors.full_messages.join("")
+        message: "Please enter a valid URL."
       }
     end
   end
