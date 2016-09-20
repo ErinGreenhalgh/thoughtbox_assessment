@@ -18,7 +18,7 @@ RSpec.describe "api::v1::links_controller" do
      user = User.create(email: "erin@turing.io", password: "password")
      link_data = {title: "Turing School", url: "bad_url", user_id: user.id}
      post "/api/v1/links", params: {link: link_data}
-     expect(response).to be_success
+     expect(response.status).to eq(400)
      expect(Link.count).to eq 0
    end
 

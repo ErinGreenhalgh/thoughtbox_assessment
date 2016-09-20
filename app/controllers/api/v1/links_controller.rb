@@ -1,6 +1,13 @@
 class Api::V1::LinksController < ApplicationController
   def create
-    render json: Link.create!(link_params)
+    link = Link.new(link_params)
+    if link.save
+      render json: link
+    else
+      render status: 400, json: {
+        message: link.errors.full_messages.join("")
+      }
+    end
   end
 
   def index
