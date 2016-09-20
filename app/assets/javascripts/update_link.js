@@ -17,7 +17,7 @@ $(document).ready(function(){
         )
       },
       error: function(){
-        console.log("It did't work")
+        alert("Url must be valid!")
       }
     });
   })
