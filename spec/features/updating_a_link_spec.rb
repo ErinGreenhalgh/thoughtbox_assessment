@@ -2,25 +2,25 @@ require "rails_helper"
 
 RSpec.feature "updating a link" do
   context "successfully", js: true do
-    # scenario "by entering a valid url" do
-    #   user = create(:user)
-    #   link = create(:link, user: user)
-    #   allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    #   new_url = "https://github.com"
-    #
-    #   visit user_links_path(user)
-    #
-    #   click_button "Edit"
-    #
-    #   # page.execute_script("$('url-#{link.id}').val('');")
-    #   fill_in("input[id='url-#{link.id}']", with: "")
-    #   # find("div[id='url-#{link.id}']").select(text)
-    #   find("div[id='url-#{link.id}']").send_keys("#{new_url}")
-    #   page.find("body").click
-    #
-    #   expect(page).to have_content(new_url)
-    #   expect(Link.find(link.id).url).to eq new_url
-    # end
+    scenario "by entering a valid url" do
+      user = create(:user)
+      link = create(:link, user: user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      new_url = "https://github.com"
+
+      visit user_links_path(user)
+
+      click_button "Edit"
+
+      16.times do
+        find("div[id='url-#{link.id}']").send_keys(:backspace)
+      end
+      find("div[id='url-#{link.id}']").send_keys("#{new_url}")
+      page.find("body").click
+
+      expect(page).to have_content(new_url)
+      expect(Link.find(link.id).url).to eq new_url
+    end
   end
 
   context "unsuccessfully", js: true do
