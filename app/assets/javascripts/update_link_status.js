@@ -19,6 +19,7 @@ $(document).ready(function(){
       data: { link: { status: newStatus}},
       success: function(idea){
         $("#" + linkId).addClass("true")
+        $("#" + linkId).removeClass("false")
         toggleButtons(button)
       },
       error: function(errorResponse){
@@ -39,6 +40,7 @@ $(document).ready(function(){
       data: { link: { status: newStatus}},
       success: function(idea){
         $("#" + linkId).removeClass("true")
+        $("#" + linkId).addClass("false")
         toggleButtons(button)
       },
       error: function(){
