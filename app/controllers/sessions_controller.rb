@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_links_path(@user)
     else
-      flash.now[:error] = "Invalid. Try Again."
-      redirect_to login_path
+      flash.now[:error] = "Invalid. Please try again or sign up if you do not have an account."
+      render :new
     end
   end
 
