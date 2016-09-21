@@ -21,6 +21,10 @@ class Api::V1::LinksController < ApplicationController
     end
   end
 
+  def alphabetical
+    render json: current_user.links.order("lower(title)").all
+  end
+
   private
 
   def render_error

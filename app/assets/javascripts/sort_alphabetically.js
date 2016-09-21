@@ -1,12 +1,12 @@
 $(document).ready(function(){
   $(".alphabet").on("click", function(){
     $.ajax({
-      url: '/api/v1/alphabetical_links',
+      url: '/api/v1/alphabetical',
       method: "GET",
       dataType: "JSON",
       success: function(link){
+        $(".all-links").children().hide()
         $(link).each(function(index, link){
-          $(".all-links").hide
           $(".all-links").append(linkStructure(link))
         })
       },
