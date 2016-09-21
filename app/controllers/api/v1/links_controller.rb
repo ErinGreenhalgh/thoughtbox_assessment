@@ -22,7 +22,7 @@ class Api::V1::LinksController < ApplicationController
   end
 
   def alphabetical
-    render json: Link.order(:title)
+    render json: current_user.links.order("lower(title)").all
   end
 
   private

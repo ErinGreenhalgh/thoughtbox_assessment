@@ -82,7 +82,7 @@ RSpec.describe "api::v1::links_controller" do
     user = create(:user)
     link_b = create(:link, title: "B Link", user: user)
     link_a = create(:link, title: "A Link", user: user)
-    # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     get '/api/v1/alphabetical'
 
